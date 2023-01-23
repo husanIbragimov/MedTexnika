@@ -37,18 +37,33 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class LoginSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(max_length=223, required=True)
-    password = serializers.CharField(max_length=18, write_only=True)
+    email = serializers.EmailField(max_length=101, required=True)
+    password = serializers.CharField(max_length=68, write_only=True)
     token = serializers.SerializerMethodField(read_only=True)
+    first_name = serializers.CharField(max_length=100, read_only=True)
+    last_name = serializers.CharField(max_length=100, read_only=True)
+    username = serializers.CharField(max_length=100, read_only=True)
 
     def get_token(self, obj):
         email = obj.get('email')
         token = Account.objects.get(email=email).token
         return token
 
+    def get_fisrt_name(self, obj):
+        user = Account.objects.filter(email=obj.get('email')).first()
+        return user.first_name
+
+    def get_last_name(self, obj):
+        user = Account.objects.filter(email=obj.get('email')).first()
+        return user.last_name
+
+    def get_username(self, obj):
+        user = Account.objects.filter(email=obj.get('email')).first()
+        return user.username
+
     class Meta:
         model = Account
-        fields = ('email', 'password', 'token', 'first_name', 'last_name', 'username')
+        fields = ('id', 'email', 'password', 'token', 'first_name', 'last_name', 'username')
 
     def validate(self, attrs):
         username = attrs.get('username')
@@ -68,6 +83,7 @@ class LoginSerializer(serializers.ModelSerializer):
 
         data = {
             'success': True,
+            'id': user.id,
             'email': user.email,
             'tokens': user.token,
             'first_name': user.first_name,
