@@ -30,29 +30,15 @@ class Category(models.Model):
 
 
 class Brand(Timestamp):
+    class Meta:
+        verbose_name = "Brend"
+        verbose_name_plural = "Brendlar"
+
     name = models.CharField(max_length=30)
     image = models.ImageField(upload_to='product/brands/')
 
     def __str__(self):
         return self.name
-
-
-class CategoryStatus(Timestamp):
-    name = models.CharField(max_length=100)
-
-    @property
-    def normalize_title(self):
-        return self.name.replace(' ', '').lower()
-
-    def __str__(self):
-        return self.name
-
-
-class NewValue(models.Model):
-    new_price = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.new_price
 
 
 class Product(Timestamp):
@@ -62,13 +48,19 @@ class Product(Timestamp):
         (2, 'POPULAR'),
         (3, 'PREMIUM'),
     )
+
+    class Meta:
+        verbose_name = "Mahsulot"
+        verbose_name_plural = "Mahsulotlar"
+
     status = models.IntegerField(choices=STATUS, default=0, verbose_name="Holati")
     name = models.CharField(max_length=223, null=True, verbose_name="Maxsulot nomi")
     slug = models.SlugField(unique=True, null=True, blank=True)
-    category = models.ManyToManyField(Category, blank=True)
+    category = models.ManyToManyField(Category, blank=True,
+                                      limit_choices_to={'is_active': True, 'parent_category__isnull': False})
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, blank=True)
     price = models.DecimalField(max_digits=15, decimal_places=2)
-    discount = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+    discount = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
     made_in = models.CharField(max_length=50)  # ishlab chiqarilgan joy
     consists = models.TextField()
     capacity = models.CharField(max_length=20)  # sig'imi
@@ -102,6 +94,10 @@ class ProductImage(Timestamp):
 
 
 class Banner(Timestamp):
+    class Meta:
+        verbose_name = "Banner rasm"
+        verbose_name_plural = "Banner rasmlar"
+
     image = models.ImageField(upload_to='product/banner/')
 
     def __str__(self):
