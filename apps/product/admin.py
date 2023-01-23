@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import Product, ProductImage, Brand, Banner, Category
+
+
 # from modeltranslation.admin import TranslationAdmin
 
 
@@ -17,7 +19,7 @@ class ProductImageInline(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
-    list_display = ['id', 'name', 'price', 'get_discounted_price', 'status', 'brand', 'created_at']
+    list_display = ['id', 'name', 'price', 'discount', 'get_discounted_price', 'status', 'brand', 'created_at']
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ['name', 'description']
     filter_horizontal = ('category',)
