@@ -6,25 +6,24 @@ from django.utils.translation import gettext_lazy as _
 
 
 class AccountManager(BaseUserManager):
-    class AccountManager(BaseUserManager):
-        def create_user(self, email, password=None, **extra_fields):
-            if email is None:
-                raise TypeError('Email did not come')
-            user = self.model(email=email, **extra_fields)
-            user.set_password(password)
-            user.save(using=self._db)
-            return user
+    def create_user(self, email, password=None, **extra_fields):
+        if email is None:
+            raise TypeError('Email did not come')
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
-        def create_superuser(self, email, password=None, **extra_fields):
-            if not password:
-                raise TypeError('Password did not come')
-            user = self.create_user(email, password, **extra_fields)
-            user.is_superuser = True
-            user.is_active = True
-            user.is_admin = True
-            user.is_staff = True
-            user.save(using=self._db)
-            return user
+    def create_superuser(self, email, password=None, **extra_fields):
+        if not password:
+            raise TypeError('Password did not come')
+        user = self.create_user(email, password, **extra_fields)
+        user.is_superuser = True
+        user.is_active = True
+        user.is_admin = True
+        user.is_staff = True
+        user.save(using=self._db)
+        return user
 
 
 GENDER = (
