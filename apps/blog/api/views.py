@@ -8,7 +8,7 @@ class ArticleListAPIView(generics.ListAPIView):
     serializer_class = ArticleSerializer
 
 
-class ArticleRetrieveDestroyAPIView(generics.RetrieveDestroyAPIView):
+class ArticleRetrieveAPIView(generics.RetrieveAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     lookup_field = 'pk'
