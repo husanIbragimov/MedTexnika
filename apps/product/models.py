@@ -59,12 +59,12 @@ class Product(Timestamp):
     category = models.ManyToManyField(Category, blank=True,
                                       limit_choices_to={'is_active': True, 'parent_category__isnull': False})
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, blank=True)
-    price = models.DecimalField(max_digits=15, decimal_places=2)
-    discount = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
-    made_in = models.CharField(max_length=50)  # ishlab chiqarilgan joy
-    consists = models.TextField()
-    capacity = models.CharField(max_length=20)  # sig'imi
-    guarantee = models.CharField(max_length=30)  # muddat
+    price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Tan narxi")
+    discount = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True, verbose_name="Chegirma")
+    made_in = models.CharField(max_length=50, verbose_name="Ishlab chiqarilgan davlat")  # ishlab chiqarilgan joy
+    consists = models.TextField(verbose_name="Maxsulot haqida ma'lumot")
+    capacity = models.CharField(max_length=20, verbose_name="Maxsulotning og'irligi")  # sig'imi
+    guarantee = models.CharField(max_length=30, verbose_name="Maxsulot kafolati")  # muddat
     is_active = models.BooleanField(default=True)
 
     def get_discounted_price(self):
@@ -85,9 +85,9 @@ class ProductImage(Timestamp):
     @property
     def get_image_url(self):
         if settings.DEBUG:
-            return f"{settings.LOCAL_BASE_URL}{self.image.url}"
+            return f"{settings.LOCAL_BASE_URL}/{self.image.url}"
         else:
-            return f"{settings.PROD_BASE_URL}{self.image.url}"
+            return f"{settings.PROD_BASE_URL}/{self.image.url}"
 
     def __str__(self):
         return f'image of {self.product.id}'
