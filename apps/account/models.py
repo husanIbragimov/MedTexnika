@@ -27,6 +27,13 @@ class AccountManager(BaseUserManager):
             return user
 
 
+GENDER = (
+    (0, 'None'),
+    (1, 'Male'),
+    (2, 'female'),
+)
+
+
 class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, db_index=True)
     username = models.CharField(max_length=100, unique=True, db_index=True)
