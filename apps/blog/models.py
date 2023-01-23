@@ -3,6 +3,10 @@ from django.urls import reverse
 
 
 class Article(models.Model):
+    class Meta:
+        verbose_name = 'Blog'
+        verbose_name_plural = 'Bloglar'
+
     title = models.CharField(max_length=221)
     slug = models.SlugField(unique=True, null=True)
     image = models.ImageField(upload_to='articles/blog_image/')
