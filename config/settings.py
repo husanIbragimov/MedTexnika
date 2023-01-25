@@ -191,15 +191,15 @@ USE_TZ = True
 # Translation
 
 # Languages supported by translation
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
 
 LANGUAGES = (
+    ('uz', _('Uzbek')),
     ('en', _('English')),
     ('ru', _('Russian')),
-    ('uz', _('Uzbek')),
 )
 
-MODELTRANSLATION_LANGUAGE = ('ru', 'uz')
+MODELTRANSLATION_LANGUAGE = ('ru', 'en')
 
 # MODELTRANSLATION_FALLBACK_LANGUAGES = ('en', 'de')
 
@@ -208,21 +208,21 @@ LOCALE_PATHS = [
 ]
 
 MODELTRANSLATION_TRANSLATION_FILES = (
-    # '<apps>.<app>.api.translation',
+    'apps.blog.api.translation',
 )
 
 TRANSLATABLE_MODEL_MODULES = [
-    # 'apps.product.models',
+    'apps.blog.models',
 ]
 
 PARLER_LANGUAGES = {
     None: (
+        {'code': 'uz', },  # Uzbek
         {'code': 'en', },  # English
         {'code': 'ru', },  # Russian
-        {'code': 'uz', },  # Uzbek
     ),
     'default': {
-        'fallbacks': ['en'],
+        'fallbacks': ['uz'],
         'hide_untranslated': False,
     }
 }
