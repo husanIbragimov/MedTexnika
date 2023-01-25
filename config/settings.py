@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
-from datetime import timedelta
 from pathlib import Path
+from datetime import timedelta
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,7 +35,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 INSTALLED_APPS = [
-    'modeltranslation',
+    'modeltranslation',  # translate
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # translate
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -185,6 +187,45 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# Translation
+
+# Languages supported by translation
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('ru', _('Russian')),
+    ('uz', _('Uzbek')),
+)
+
+MODELTRANSLATION_LANGUAGE = ('ru', 'uz')
+
+# MODELTRANSLATION_FALLBACK_LANGUAGES = ('en', 'de')
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]
+
+MODELTRANSLATION_TRANSLATION_FILES = (
+    # '<apps>.<app>.api.translation',
+)
+
+TRANSLATABLE_MODEL_MODULES = [
+    # 'apps.product.models',
+]
+
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'en', },  # English
+        {'code': 'ru', },  # Russian
+        {'code': 'uz', },  # Uzbek
+    ),
+    'default': {
+        'fallbacks': ['en'],
+        'hide_untranslated': False,
+    }
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
