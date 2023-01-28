@@ -1,8 +1,6 @@
 from django.contrib import admin
 from .models import Product, ProductImage, Brand, Banner, Category
-
-
-# from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TranslationAdmin
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -17,7 +15,7 @@ class ProductImageInline(admin.TabularInline):
     extra = 1
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TranslationAdmin):
     inlines = [ProductImageInline]
     list_display = ['id', 'name', 'price', 'discount', 'get_discounted_price', 'status', 'brand', 'created_at']
     prepopulated_fields = {"slug": ("name",)}

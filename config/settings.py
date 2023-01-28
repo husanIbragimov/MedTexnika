@@ -209,10 +209,12 @@ LOCALE_PATHS = [
 
 MODELTRANSLATION_TRANSLATION_FILES = (
     'apps.blog.api.translation',
+    'apps.product.api.translation',
 )
 
 TRANSLATABLE_MODEL_MODULES = [
     'apps.blog.models',
+    'apps.product.models',
 ]
 
 PARLER_LANGUAGES = {
