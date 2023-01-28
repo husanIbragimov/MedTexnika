@@ -1,6 +1,6 @@
-from apps.contact.models import GetInTouch, Subscribe
-from rest_framework import generics, permissions
-from .serializers import GetInTouchSerializer, SubscribeSerializer
+from rest_framework import generics
+from apps.contact.models import GetInTouch, Subscribe, Location
+from .serializers import GetInTouchSerializer, SubscribeSerializer, LocationSerializer
 
 
 class GetInTouchCreateAPIView(generics.CreateAPIView):
@@ -11,3 +11,9 @@ class GetInTouchCreateAPIView(generics.CreateAPIView):
 class SubscribeCreateAPIView(generics.CreateAPIView):
     queryset = Subscribe.objects.filter(is_active=True).order_by('-id')
     serializer_class = SubscribeSerializer
+
+
+class LocationListAPIView(generics.ListAPIView):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
+

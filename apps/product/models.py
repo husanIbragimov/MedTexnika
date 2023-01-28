@@ -85,9 +85,9 @@ class ProductImage(Timestamp):
     @property
     def get_image_url(self):
         if settings.DEBUG:
-            return f"{settings.LOCAL_BASE_URL}/{self.image.url}"
+            return f"{settings.LOCAL_BASE_URL}{self.image.url}"
         else:
-            return f"{settings.PROD_BASE_URL}/{self.image.url}"
+            return f"{settings.PROD_BASE_URL}{self.image.url}"
 
     def __str__(self):
         return f'image of {self.product.id}'

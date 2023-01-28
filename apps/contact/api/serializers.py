@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.contact.models import GetInTouch, Subscribe
+from apps.contact.models import GetInTouch, Subscribe, Location
 
 
 class GetInTouchSerializer(serializers.ModelSerializer):
@@ -18,3 +18,9 @@ class SubscribeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscribe
         fields = ['id', 'email']
+
+
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = '__all__'

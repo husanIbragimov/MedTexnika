@@ -20,3 +20,11 @@ class Subscribe(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Location(models.Model):
+    name = models.CharField(max_length=223)
+    url = models.URLField()
+
+    def __str__(self):
+        return self.name
