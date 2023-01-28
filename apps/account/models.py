@@ -45,7 +45,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False, verbose_name='Super user')
     is_admin = models.BooleanField(default=False, verbose_name='Admin user')
     is_staff = models.BooleanField(default=False, verbose_name='Staff user')
-    is_active = models.BooleanField(default=False, verbose_name='Active user')
+    is_active = models.BooleanField(default=True, verbose_name='Active user')
     date_login = models.DateTimeField(auto_now=True, verbose_name='Last login')
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Created date')
 
