@@ -4,8 +4,8 @@ from modeltranslation.admin import TranslationAdmin
 
 
 class ArticleAdmin(TranslationAdmin):
-    search_fields = ('id', 'title', 'content')
-    list_display = ('id', 'title', 'slug', 'content')
+    search_fields = ('id', 'title', 'content', 'created_at')
+    list_display = ('id', 'title',)
     prepopulated_fields = {"slug": ("title",)}
 
 
