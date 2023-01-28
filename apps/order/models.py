@@ -47,7 +47,7 @@ class OrderItems(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, related_name='order_products')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, related_name='products')
     quantity = models.PositiveIntegerField()
-    summa = models.DecimalField(max_digits=10, decimal_places=2)
+    summa = models.FloatField(null=True)
 
     class Meta:
         unique_together = ['order', 'product']

@@ -59,8 +59,8 @@ class Product(Timestamp):
     category = models.ManyToManyField(Category, blank=True,
                                       limit_choices_to={'is_active': True, 'parent_category__isnull': False})
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, blank=True)
-    price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Tan narxi")
-    discount = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True, verbose_name="Chegirma")
+    price = models.FloatField(verbose_name="Tan narxi")
+    discount = models.FloatField(null=True, blank=True, verbose_name="Chegirma")
     made_in = models.CharField(max_length=50, verbose_name="Ishlab chiqarilgan davlat")  # ishlab chiqarilgan joy
     consists = models.TextField(verbose_name="Maxsulot haqida ma'lumot")
     capacity = models.CharField(max_length=20, verbose_name="Maxsulotning og'irligi")  # sig'imi
