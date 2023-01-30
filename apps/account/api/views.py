@@ -46,7 +46,7 @@ class AccountRegisterAPIView(generics.GenericAPIView):
         }
         Util.send_email(data)
 
-        return Response({'success': True, 'message': 'Activate url was sent your email'},
+        return Response({'success': True, 'message': 'Activate url was sent your email', 'token': str(token)},
                         status=status.HTTP_201_CREATED)
 
 
