@@ -9,7 +9,7 @@ class GetInTouchCreateAPIView(generics.CreateAPIView):
 
 
 class SubscribeCreateAPIView(generics.CreateAPIView):
-    queryset = Subscribe.objects.filter(is_active=True).order_by('-id')
+    queryset = Subscribe.objects.all()
     serializer_class = SubscribeSerializer
 
 
