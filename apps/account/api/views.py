@@ -2,6 +2,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_bytes, smart_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
+from config.settings import LOCAL_BASE_URL
 from .serializers import RegisterSerializer, EmailVerificationSerializer, LoginSerializer, ResetPasswordSerializer, \
     SetNewPasswordSerializer, ChangeNewPasswordSerializer, AccountSerializer
 from rest_framework import generics, views, status
@@ -35,13 +36,13 @@ class AccountRegisterAPIView(generics.GenericAPIView):
         token = RefreshToken.for_user(user)
 
         # activate account with email
-        current_site = '127.0.0.1:8000/'
+        current_site = f'{LOCAL_BASE_URL}/'
         relative_link = 'account/verify-email/'
-        abs_url = f'http://{current_site}{relative_link}?token={str(token.access_token)}'
+        abs_url = f'https://{current_site}{relative_link}?token={str(token.access_token)}'
         email_body = f'Hi, {user.email} \n User link below to activate your email \n {abs_url}'
         data = {
             'to_email': user.email,
-            'email_subject': 'Activate email to Eski Toshmi MedTexnika',
+            'email_subject': 'Activate email to Eski Toshmi Med Texnika',
             'email_body': email_body
         }
         Util.send_email(data)
