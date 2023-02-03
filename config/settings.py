@@ -28,7 +28,9 @@ SECRET_KEY = 'django-insecure-6*zj*gp-w0pxg3(w1y-$&2bn5vug+qxy+0h@+=polg1()yg2df
 # DEBUG = str(os.environ.get('DEBUG')) == '1'
 DEBUG = True
 
-ALLOWED_HOSTS = ['one-tech-chi.vercel.app']
+ALLOWED_HOSTS = ['*']
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -42,10 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # libs
+    'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
-    'corsheaders',
 
     # local apps
     'apps.account',
@@ -66,6 +68,26 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# cors headers ->
+CORS_ALLOWED_ORIGINS = [
+    "https://one-tech-chi.vercel.app",
+    "http://localhost:3000",
+]
+
+CORS_ALLOW_METHODS = [
+    '*'
+]
+
+CORS_ALLOW_HEADERS = [
+    '*'
+]
+CORS_ALLOW_CREDENTIALS = True
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+ROOT_URLCONF = 'config.urls'
 
 AUTH_USER_MODEL = 'account.Account'
 
@@ -94,31 +116,6 @@ SWAGGER_SETTINGS = {
         }
     }
 }
-
-# cors headers ->
-CORS_ORIGIN_ALLOW_ALL = False
-
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_ORIGIN_WHITELIST = ('https://one-tech-chi.vercel.app',)
-
-CORS_ALLOWED_ORIGINS = [
-    "https://one-tech-chi.vercel.app",
-    "http://localhost:3000",
-]
-
-CORS_ALLOW_METHODS = [
-    '*'
-]
-
-CORS_ALLOW_HEADERS = [
-    '*'
-]
-
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-
-ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
