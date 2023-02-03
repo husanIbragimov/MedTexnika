@@ -99,9 +99,8 @@ SWAGGER_SETTINGS = {
 
 # cors headers ->
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:3000",
     "http://localhost:3000",
-    "https://one-tech-chi.vercel.app"
+    "https://one-tech-chi.vercel.app",
 ]
 
 CORS_ALLOW_METHODS = [
