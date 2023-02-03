@@ -100,8 +100,10 @@ CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ORIGIN_WHITELIST = ('https://one-tech-chi.vercel.app',)
+
 CORS_ALLOWED_ORIGINS = [
-    "https://one-tech-chi.vercel.app/",
+    "https://one-tech-chi.vercel.app",
     "http://localhost:3000",
 ]
 
