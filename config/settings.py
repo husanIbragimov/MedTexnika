@@ -30,8 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CORS_ORIGIN_ALLOW_ALL = True
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,6 +53,19 @@ INSTALLED_APPS = [
     'apps.contact',
     'apps.order',
     'apps.blog',
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',  # for localhost (REACT Default)
+    'https://one-tech-chi.vercel.app',  # for network (Development)
+)
+
+# cors headers ->
+CORS_ALLOWED_ORIGINS = [
+    "https://one-tech-chi.vercel.app",
+    "http://localhost:3000",
 ]
 
 MIDDLEWARE = [
@@ -97,10 +108,7 @@ SWAGGER_SETTINGS = {
     }
 }
 
-# cors headers ->
-CORS_ALLOWED_ORIGINS = [
-    "https://one-tech-chi.vercel.app",
-]
+
 
 CORS_ALLOW_METHODS = [
     '*'
