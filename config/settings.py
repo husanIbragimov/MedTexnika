@@ -30,8 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CORS_ORIGIN_ALLOW_ALL = True
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -98,6 +96,10 @@ SWAGGER_SETTINGS = {
 }
 
 # cors headers ->
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOWED_ORIGINS = [
     "https://one-tech-chi.vercel.app/",
     "http://localhost:3000",
@@ -110,7 +112,6 @@ CORS_ALLOW_METHODS = [
 CORS_ALLOW_HEADERS = [
     '*'
 ]
-CORS_ALLOW_CREDENTIALS = True
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
