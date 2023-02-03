@@ -70,10 +70,10 @@ MIDDLEWARE = [
 ]
 
 # cors headers ->
-CORS_ALLOWED_ORIGINS = [
+CORS_ALLOWED_ORIGINS = (
     "https://one-tech-chi.vercel.app",
     "http://localhost:3000",
-]
+)
 
 CORS_ALLOW_METHODS = [
     '*'
