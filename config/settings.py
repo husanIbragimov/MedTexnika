@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-6*zj*gp-w0pxg3(w1y-$&2bn5vug+qxy+0h@+=polg1()yg2df
 # DEBUG = str(os.environ.get('DEBUG')) == '1'
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['one-tech-chi.vercel.app']
 
 # Application definition
 
