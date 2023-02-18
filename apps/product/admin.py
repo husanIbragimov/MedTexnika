@@ -3,7 +3,7 @@ from .models import Product, ProductImage, Brand, Banner, Category
 from modeltranslation.admin import TranslationAdmin
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     list_display = ('id', 'title', 'parent_category', 'is_active', 'date_created')
     list_filter = ('parent_category', 'is_active', 'date_created')
     autocomplete_fields = ('parent_category',)

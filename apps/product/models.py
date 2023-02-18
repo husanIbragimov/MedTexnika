@@ -62,18 +62,17 @@ class Product(Timestamp):
     discount = models.FloatField(null=True, blank=True, verbose_name="Chegirma")
     made_in = models.CharField(max_length=50, verbose_name="Ishlab chiqarilgan davlat")  # ishlab chiqarilgan joy
     consists = models.TextField(verbose_name="Maxsulot haqida ma'lumot")
-    capacity = models.CharField(max_length=20, verbose_name="Maxsulotning og'irligi")  # sig'imi
-    guarantee = models.CharField(max_length=30, verbose_name="Maxsulot kafolati")  # muddat
+    capacity = models.CharField(max_length=20, verbose_name="Maxsulotning og'irligi", null=True, blank=True)  # sig'imi
+    guarantee = models.CharField(max_length=30, verbose_name="Maxsulot kafolati", null=True, blank=True)  # muddat
     is_active = models.BooleanField(default=True)
 
     def get_discounted_price(self):
-        return self.price - (self.price * (self.discount / 100))
-
-    def get_absolute_url(self):
-        return reverse("product_detail", kwargs={"slug": self.slug})
+        if self.discount:
+            return self.price - (self.price * (self.discount / 100))
+        return None
 
     def __str__(self):
-        return f'{self.name} | {self.id}'
+        return f'{self.name}'
 
 
 class ProductImage(Timestamp):
@@ -89,7 +88,7 @@ class ProductImage(Timestamp):
             return f"{settings.PROD_BASE_URL}{self.image.url}"
 
     def __str__(self):
-        return f'image of {self.product.id}'
+        return f'image of {self.product}'
 
 
 class Banner(Timestamp):
